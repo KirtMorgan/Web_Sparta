@@ -24,6 +24,8 @@ namespace UserPortal.Pages.Specialisations
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (HttpContext.Session.GetString("Test") != "1")
+                return RedirectToPage("/Login");
             if (id == null)
             {
                 return NotFound();
@@ -40,8 +42,6 @@ namespace UserPortal.Pages.Specialisations
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             if (id == null)
             {
                 return NotFound();

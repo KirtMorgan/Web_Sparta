@@ -25,6 +25,8 @@ namespace UserPortal.Pages.Cohorts
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (HttpContext.Session.GetString("Test") != "1")
+                return RedirectToPage("/Login");
             if (id == null)
             {
                 return NotFound();
@@ -43,8 +45,6 @@ namespace UserPortal.Pages.Cohorts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             if (!ModelState.IsValid)
             {
                 return Page();

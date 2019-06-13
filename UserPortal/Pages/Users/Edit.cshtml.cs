@@ -25,6 +25,8 @@ namespace UserPortal.Pages.Users
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+            if (HttpContext.Session.GetString("Test") != "1")
+                return RedirectToPage("/Login");
             if (id == null)
             {
                 return NotFound();
@@ -45,8 +47,6 @@ namespace UserPortal.Pages.Users
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             if (!ModelState.IsValid)
             {
                 ViewData["CohortID"] = new SelectList(_context.Cohorts, "CohortID", "CohortID");

@@ -23,8 +23,6 @@ namespace UserPortal.Pages.Users
 
         public async Task<IActionResult> OnGetAsync()
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             Users = await _context.Users
                 .Include(u => u.Cohort)
                 .Include(u => u.Role).ToListAsync();
