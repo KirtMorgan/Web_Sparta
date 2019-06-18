@@ -21,6 +21,8 @@ namespace UserPortal.Pages.Roles
 
         public IActionResult OnGet()
         {
+            if (HttpContext.Session.GetString("Test") != "1")
+                return RedirectToPage("/Login");
             return Page();
         }
 
@@ -29,8 +31,6 @@ namespace UserPortal.Pages.Roles
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             if (!ModelState.IsValid)
             {
                 return Page();

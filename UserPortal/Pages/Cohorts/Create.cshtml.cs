@@ -21,7 +21,9 @@ namespace UserPortal.Pages.Cohorts
 
         public IActionResult OnGet()
         {
-        ViewData["SpecialisationID"] = new SelectList(_context.Specialisations, "SpecialisationID", "SpecialisationName");
+            if (HttpContext.Session.GetString("Test") != "1")
+                return RedirectToPage("/Login");
+            ViewData["SpecialisationID"] = new SelectList(_context.Specialisations, "SpecialisationID", "SpecialisationName");
             return Page();
         }
 
@@ -30,8 +32,6 @@ namespace UserPortal.Pages.Cohorts
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (HttpContext.Session.GetString("Test") != "1")
-                return RedirectToPage("/Login");
             if (!ModelState.IsValid)
             {
                 return Page();
